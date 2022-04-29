@@ -33,6 +33,9 @@ public class VorlageGUI extends JFrame {
 	private JTextField textEndWoche;
 	private JTextField textAnzahlPersonen;
 	private JTextField textRueckmeldung;
+	private JTextField textAusgabeStartWoche;
+	private JTextField textAusgabeEndWoche;
+	private JTextField textAusgabeAnzahlPersonen;
 
 	/**
 	 * Launch the application.
@@ -61,12 +64,13 @@ public class VorlageGUI extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		boolean reservierungDurchfuehren = false;
+		int[][] reservierung = new int[2][10];
 		
 		JButton btnReservierungDurchfuehren = new JButton("Reservierung Durchf\u00FChren");
 		btnReservierungDurchfuehren.setBounds(27, 250, 200, 60);
 		btnReservierungDurchfuehren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int[][] reservierung = new int[2][10];
+				
 				
 				reservierung[0][Integer.parseInt(textBungalowNr.getText())] = Integer.parseInt(textStartWoche.getText());
 				reservierung[1][Integer.parseInt(textBungalowNr.getText())] = Integer.parseInt(textEndWoche.getText());
@@ -139,9 +143,35 @@ public class VorlageGUI extends JFrame {
 		comboAuswahlBungalow.setBounds(580, 26, 45, 30);
 		getContentPane().add(comboAuswahlBungalow);
 		
-		JTextField textBuchungenAnzeigen = new JTextField();
-		textBuchungenAnzeigen.setColumns(10);
-		textBuchungenAnzeigen.setBounds(425, 72, 200, 200);
-		getContentPane().add(textBuchungenAnzeigen);
+		JLabel lblStartWoche_1 = new JLabel("Start-Woche:");
+		lblStartWoche_1.setBounds(425, 72, 100, 40);
+		getContentPane().add(lblStartWoche_1);
+		
+		JLabel lblEndWoche_1 = new JLabel("End-Woche:");
+		lblEndWoche_1.setBounds(425, 123, 100, 40);
+		getContentPane().add(lblEndWoche_1);
+		
+		JLabel lblAnzahlPersonen_1 = new JLabel("Anzahl Personen:");
+		lblAnzahlPersonen_1.setBounds(425, 173, 100, 40);
+		getContentPane().add(lblAnzahlPersonen_1);
+		
+		textAusgabeStartWoche = new JTextField();
+		 int Startwoche= reservierung[0][(int) comboAuswahlBungalow.getSelectedItem()
+		textAusgabeStartWoche.setText(Integer.parseString(Startwoche)]);
+		textAusgabeStartWoche.setBounds(578, 82, 86, 20);
+		getContentPane().add(textAusgabeStartWoche);
+		textAusgabeStartWoche.setColumns(10);
+		
+		textAusgabeEndWoche = new JTextField();
+		textAusgabeEndWoche.setText("123");
+		textAusgabeEndWoche.setBounds(578, 133, 86, 20);
+		getContentPane().add(textAusgabeEndWoche);
+		textAusgabeEndWoche.setColumns(10);
+		
+		textAusgabeAnzahlPersonen = new JTextField();
+		textAusgabeAnzahlPersonen.setText("123");
+		textAusgabeAnzahlPersonen.setBounds(578, 183, 86, 20);
+		getContentPane().add(textAusgabeAnzahlPersonen);
+		textAusgabeAnzahlPersonen.setColumns(10);
 	}
 }
