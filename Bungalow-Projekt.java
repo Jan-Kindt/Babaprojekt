@@ -9,27 +9,17 @@
  *  ----------------------------------------------------------------------
  */
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.nio.file.attribute.AclEntry;
-import java.util.InputMismatchException;
-import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import javax.swing.JTextPane;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.GridBagLayout;
-import java.awt.Dimension;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
 import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
 
 public class Main extends JFrame {
 	private JTextField textBungalowNr;
@@ -44,7 +34,8 @@ public class Main extends JFrame {
 	int StartWoche = 0;
 	int EndWoche = 0;
 	int Personen = 0;
-	boolean ReservierungFunktioniert = true;
+	int Kundennummer = 0;
+	
 	
 	
 	public static void main(String[] args) {
@@ -96,44 +87,52 @@ public class Main extends JFrame {
 				 
 				 
 				 if( EndWoche < StartWoche) {
+					 
+					 textRueckmeldung.setText("Die Startwoche muss vor der Endwoche liegen!");
 					 throw new IllegalAccessException();
 					
 					}
+				 else
+				 	{
+					 textRueckmeldung.setText("Reservierung erfolgreich!");
+					 	reservierung[0][Bungalownr] = StartWoche;
+						reservierung[1][Bungalownr] = EndWoche;
+						reservierung[2][Bungalownr] = Personen;
+				 	}
+				 //Kundennummer = 	Integer.parseInt(textKundennummer.getText());
+				// if (Kundennummer <1000 || EndWoche > 9999 ) {
+				//	 throw new IllegalArgumentException();
+				 //}
 					 
 				 Personen = Integer.parseInt(textAnzahlPersonen.getText());
-
+				 if (Personen > Bungalownr) {
+					 textRueckmeldung.setText("Zu viele Personen in diesem Bungalow!");
+					 reservierung[0][Bungalownr] = 0;
+						reservierung[1][Bungalownr] = 0;
+						reservierung[2][Bungalownr] = 0;
+				}
+				 else
+				 	{
+					 textRueckmeldung.setText("Reservierung erfolgreich!");
+					 reservierung[0][Bungalownr] = StartWoche;
+						reservierung[1][Bungalownr] = EndWoche;
+						reservierung[2][Bungalownr] = Personen;
+				 	}
+				 
+				 
+				 
+				 
+				 
 				}catch (IllegalArgumentException a) {
 					textRueckmeldung.setText("Bitte gültige Zahlen eingeben bzw. Zahlen prüfen!");
-					ReservierungFunktioniert = false;
+					
 				} catch (IllegalAccessException e1) {
 					textRueckmeldung.setText("Die Startwoche muss vor der Endwoche liegen!");
-					ReservierungFunktioniert = false;
+					
 					e1.printStackTrace();
 				}
 				
-				
-				
-				
-				
-				
-				reservierung[0][Bungalownr] = StartWoche;
-				reservierung[1][Bungalownr] = EndWoche;
-				reservierung[2][Bungalownr] = Personen;
-				
-				if (ReservierungFunktioniert = true) {
-					textRueckmeldung.setText("Reservierung erfolgreich!");
-				}
-				
-					
-				
-					
-				
-				
-				
-				
-				
-				
-				
+
 			}
 		});
 		
@@ -234,6 +233,8 @@ public class Main extends JFrame {
 						"Start Woche: " + reservierung[0][Integer.parseInt(textEingabeBungalow.getText())] +"\n"+
 						"End Woche: " + reservierung[1][Integer.parseInt(textEingabeBungalow.getText())] +"\n"+
 						"Personen: " + reservierung[2][Integer.parseInt(textEingabeBungalow.getText())] +"\n"
+						
+						
 									);
 				
 			}
