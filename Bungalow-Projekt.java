@@ -1,5 +1,6 @@
 /**
  *  VORLAGE GUI 
+
  *  ---------------------------------------------------------------------- 
  *  Autor: Peter Braunschï¿½del
  *  Erstellungs-Datum: 28.03.2022
@@ -8,7 +9,7 @@
  *  ï¿½nderung: Kommentar hinzugefï¿½gt
  *  ----------------------------------------------------------------------
  */
-
+//import der Bibliotheken
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
@@ -22,6 +23,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class Main extends JFrame {
+	//Variablen Deklarieren/Initalisieren
 	private JTextField textBungalowNr;
 	private JTextField textStartWoche;
 	private JTextField textEndWoche;
@@ -37,7 +39,7 @@ public class Main extends JFrame {
 	int Kundennummer = 0;
 	
 	
-	
+	 //Fenster erstellen und starten
 	public static void main(String[] args) {
 		
 	
@@ -58,71 +60,66 @@ public class Main extends JFrame {
 	 * Create the frame.
 	 */
 	public Main() {
+		//Fenster einstellen
 		setAutoRequestFocus(false);
 		setPreferredSize(new Dimension(800, 400));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		//Reservierungen speichern
 		
 		int[][] reservierung = new int[3][10];
-		
+		//Funktionen der einzelnen Knöpfe
 		JButton btnReservierungDurchfuehren = new JButton("Reservierung Durchf\u00FChren");
 		btnReservierungDurchfuehren.setForeground(Color.BLUE);
 		btnReservierungDurchfuehren.setBounds(27, 250, 296, 60);
 		btnReservierungDurchfuehren.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+		//Try-catch zum abfangen von falschen eingaben	
 				try {
-				 Bungalownr = Integer.parseInt(textBungalowNr.getText());
-				 if (Bungalownr < 1 || Bungalownr >10) {
-					throw new IllegalArgumentException();
-				}
-				 StartWoche =  Integer.parseInt(textStartWoche.getText());
-				 if (StartWoche <1 || StartWoche > 52 ) {
-					 throw new IllegalArgumentException();
-				}
-				 EndWoche = 	Integer.parseInt(textEndWoche.getText());
-				 if (EndWoche <1 || EndWoche > 52 ) {
-					 throw new IllegalArgumentException();
-				 }
-				 
-				 
-				 if( EndWoche < StartWoche) {
-					 
-					 textRueckmeldung.setText("Die Startwoche muss vor der Endwoche liegen!");
-					 throw new IllegalAccessException();
-					
-					}
-				 else
-				 	{
-					 textRueckmeldung.setText("Reservierung erfolgreich!");
-					 	reservierung[0][Bungalownr] = StartWoche;
-						reservierung[1][Bungalownr] = EndWoche;
-						reservierung[2][Bungalownr] = Personen;
-				 	}
-				 //Kundennummer = 	Integer.parseInt(textKundennummer.getText());
-				// if (Kundennummer <1000 || EndWoche > 9999 ) {
-				//	 throw new IllegalArgumentException();
-				 //}
-					 
-				 Personen = Integer.parseInt(textAnzahlPersonen.getText());
-				 if (Personen > Bungalownr) {
-					 textRueckmeldung.setText("Zu viele Personen in diesem Bungalow!");
-					 reservierung[0][Bungalownr] = 0;
-						reservierung[1][Bungalownr] = 0;
-						reservierung[2][Bungalownr] = 0;
-				}
-				 else
-				 	{
-					 textRueckmeldung.setText("Reservierung erfolgreich!");
-					 reservierung[0][Bungalownr] = StartWoche;
-						reservierung[1][Bungalownr] = EndWoche;
-						reservierung[2][Bungalownr] = Personen;
-				 	}
-				 
-				 
-				 
-				 
-				 
+						Bungalownr = Integer.parseInt(textBungalowNr.getText());
+							if (Bungalownr < 1 || Bungalownr >10) {
+								throw new IllegalArgumentException();
+							}
+						 StartWoche =  Integer.parseInt(textStartWoche.getText());
+						 	if (StartWoche <1 || StartWoche > 52 ) {
+						 		throw new IllegalArgumentException();
+						 	}
+						 EndWoche = 	Integer.parseInt(textEndWoche.getText());
+						 	if (EndWoche <1 || EndWoche > 52 ) {
+						 		throw new IllegalArgumentException();
+						 	}
+						 
+						 	if( EndWoche < StartWoche) {
+						 		textRueckmeldung.setText("Die Startwoche muss vor der Endwoche liegen!");
+						 		throw new IllegalAccessException();
+							}
+						 	else
+						 	{
+							 	textRueckmeldung.setText("Reservierung erfolgreich!");
+							 	reservierung[0][Bungalownr] = StartWoche;
+								reservierung[1][Bungalownr] = EndWoche;
+								reservierung[2][Bungalownr] = Personen;
+						 	}
+						
+						//einlesen der eingaben mit bestätigung oder Fehlerausgabe	 
+						 Personen = Integer.parseInt(textAnzahlPersonen.getText());
+						 	if (Personen > Bungalownr) {
+						 		textRueckmeldung.setText("Zu viele Personen in diesem Bungalow!");
+						 		reservierung[0][Bungalownr] = 0;
+								reservierung[1][Bungalownr] = 0;
+								reservierung[2][Bungalownr] = 0;
+						 	}
+						 	else
+						 	{
+						 		textRueckmeldung.setText("Reservierung erfolgreich!");
+						 		reservierung[0][Bungalownr] = StartWoche;
+								reservierung[1][Bungalownr] = EndWoche;
+								reservierung[2][Bungalownr] = Personen;
+						 	}
+						 
+						 
+						 
+						 
+						 
 				}catch (IllegalArgumentException a) {
 					textRueckmeldung.setText("Bitte gültige Zahlen eingeben bzw. Zahlen prüfen!");
 					
@@ -135,7 +132,7 @@ public class Main extends JFrame {
 
 			}
 		});
-		
+		//Funktionen der einzelnen Knöpfe
 		getContentPane().setLayout(null);
 		getContentPane().add(btnReservierungDurchfuehren);
 		
@@ -143,13 +140,14 @@ public class Main extends JFrame {
 		btnNewButton_2.setForeground(Color.RED);
 		btnNewButton_2.setBounds(652, 441, 123, 60);
 		btnNewButton_2.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
 		getContentPane().add(btnNewButton_2);
 		
-		// Eingabe der Daten
+		// Felder für die eingabe
 		
 		
 		textBungalowNr = new JTextField();
@@ -227,7 +225,7 @@ public class Main extends JFrame {
 		btnNewButton.setForeground(Color.BLUE);
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+		// Ausgabe was passiert ist
 				textAusgabe.setText(
 						
 						"Start Woche: " + reservierung[0][Integer.parseInt(textEingabeBungalow.getText())] +"\n"+
